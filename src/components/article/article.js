@@ -116,25 +116,25 @@ const data = [
   Refresh the page to see the new article.
 */
 
-function articleMaker(articleArray) {
+function articleMaker(articleObj) {
   const div = document.createElement("div");
   div.classList.add("article");
 
   const h2 = document.createElement("h2");
-  h2.textContent = articleArray.title;
+  h2.textContent = articleObj.title;
   div.appendChild(h2);
 
   const publish = document.createElement("p");
   publish.classList.add("date");
-  publish.textContent = articleArray.date;
+  publish.textContent = articleObj.date;
   div.appendChild(publish);
 
   const p1 = document.createElement("p")
   const p2 = document.createElement("p")
   const p3 = document.createElement("p")
-  p1.textContent = articleArray.firstParagraph;
-  p2.textContent = articleArray.secondParagraph;
-  p3.textContent = articleArray.thirdParagraph;
+  p1.textContent = articleObj.firstParagraph;
+  p2.textContent = articleObj.secondParagraph;
+  p3.textContent = articleObj.thirdParagraph;
   div.appendChild(p1);
   div.appendChild(p2);
   div.appendChild(p3);
@@ -144,8 +144,15 @@ function articleMaker(articleArray) {
   span.textContent = "+";
   div.appendChild(span);
 
+  span.addEventListener(("click"), () => {
+    div.classList.toggle("article-open");
+  })
+
   return div
 
 }
 
-console.log(articleMaker(data));
+data.forEach(article => {
+  const divEle = articleMaker(article);
+  document.querySelector("div.articles").appendChild(divEle);
+})
